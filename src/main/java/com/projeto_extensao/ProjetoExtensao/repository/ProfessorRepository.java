@@ -1,6 +1,5 @@
 package com.projeto_extensao.ProjetoExtensao.repository;
 
-import com.projeto_extensao.ProjetoExtensao.model.Aluno;
 import com.projeto_extensao.ProjetoExtensao.model.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -39,9 +38,10 @@ public class ProfessorRepository {
         this.template = template;
     }
 
-    public void save(Professor professor) {
+    public Professor save(Professor professor) {
         String sql = "insert into professor (nome, cpf, curso) values (?,?,?);";
         template.update(sql, professor.getNome(), professor.getCpf(), professor.getCurso());
+        return professor;
     }
 
     public List<Professor> findProfessores(){
@@ -51,10 +51,11 @@ public class ProfessorRepository {
         return professores;
     }
 
-    public void update(Professor professor, int id) {
+    public Professor update(Professor professor, int id) {
         String sql = "UPDATE professor SET nome = ?, cpf = ?, curso = ? WHERE id = ?;";
 
         template.update(sql, professor.getNome(), professor.getCpf(), professor.getCurso(), id);
+        return professor;
     }
 
     public Optional<Professor> pegaProfessor(int id) {

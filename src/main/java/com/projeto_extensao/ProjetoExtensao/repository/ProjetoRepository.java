@@ -1,6 +1,5 @@
 package com.projeto_extensao.ProjetoExtensao.repository;
 
-import com.projeto_extensao.ProjetoExtensao.model.Professor;
 import com.projeto_extensao.ProjetoExtensao.model.Projeto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -36,9 +35,10 @@ public class ProjetoRepository {
         this.template = template;
     }
 
-    public void save(Projeto projeto) {
+    public Projeto save(Projeto projeto) {
         String sql = "insert into projeto (nome) values (?);";
         template.update(sql, projeto.getNome());
+        return projeto;
     }
 
     public List<Projeto> findProjeto(){
@@ -48,10 +48,11 @@ public class ProjetoRepository {
         return projeto;
     }
 
-    public void update(Projeto projeto, int id) {
+    public Projeto update(Projeto projeto, int id) {
         String sql = "UPDATE projeto SET nome = ? WHERE id = ?;";
 
         template.update(sql, projeto.getNome(), id);
+        return projeto;
     }
 
     public Optional<Projeto> pegaProjeto(int id) {
