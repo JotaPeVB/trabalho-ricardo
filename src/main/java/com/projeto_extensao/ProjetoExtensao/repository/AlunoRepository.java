@@ -1,18 +1,19 @@
 package com.projeto_extensao.ProjetoExtensao.repository;
 
 import com.projeto_extensao.ProjetoExtensao.model.Aluno;
-import com.projeto_extensao.ProjetoExtensao.model.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 @Repository
 public class AlunoRepository {
 
@@ -39,9 +40,10 @@ public class AlunoRepository {
         this.template = template;
     }
 
-    public void save(Aluno aluno) {
+    public Aluno save(Aluno aluno) {
         String sql = "insert into aluno (nome, cpf, curso) values (?,?,?);";
         template.update(sql, aluno.getNome(), aluno.getCpf(), aluno.getCurso());
+        return aluno;
     }
 
     public List<Aluno> findAlunos(){
@@ -62,10 +64,11 @@ public class AlunoRepository {
         return Optional.ofNullable(aluno);
     }
 
-    public void update(Aluno aluno, int id) {
+    public Aluno update(Aluno aluno, int id) {
         String sql = "UPDATE aluno SET nome = ?, cpf = ?, curso = ? WHERE id = ?;";
 
         template.update(sql, aluno.getNome(), aluno.getCpf(), aluno.getCurso(), id);
+        return aluno;
     }
 
     public void delete(int id) {
