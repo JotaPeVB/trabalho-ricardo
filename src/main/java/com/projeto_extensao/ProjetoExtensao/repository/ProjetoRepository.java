@@ -36,27 +36,27 @@ public class ProjetoRepository {
     }
 
     public Projeto save(Projeto projeto) {
-        String sql = "insert into projeto (nome) values (?);";
+        String sql = "insert into projeto_extensao(nome) values (?);";
         template.update(sql, projeto.getNome());
         return projeto;
     }
 
     public List<Projeto> findProjeto(){
-        String sql = "select * from projeto;";
+        String sql = "select * from projeto_extensao;";
 
         List<Projeto> projeto = template.query(sql, mapper);
         return projeto;
     }
 
     public Projeto update(Projeto projeto, int id) {
-        String sql = "UPDATE projeto SET nome = ? WHERE id = ?;";
+        String sql = "UPDATE projeto_extensao SET nome = ? WHERE id = ?;";
 
         template.update(sql, projeto.getNome(), id);
         return projeto;
     }
 
     public Optional<Projeto> pegaProjeto(int id) {
-        String sql = "select * from projeto where id = ?";
+        String sql = "select * from projeto_extensao where id = ?";
         Projeto projeto = null;
         try {
             projeto = template.queryForObject(sql, new Object[]{id}, mapper);
@@ -68,7 +68,7 @@ public class ProjetoRepository {
 
 
     public void delete(int id) {
-        String sql = "delete from projeto where id = ?;";
+        String sql = "delete from projeto_extensao where id = ?;";
 
         template.update(sql, id);
     }

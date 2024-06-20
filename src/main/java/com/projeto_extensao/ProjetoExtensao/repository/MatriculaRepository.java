@@ -4,6 +4,7 @@ import com.projeto_extensao.ProjetoExtensao.model.Aluno;
 import com.projeto_extensao.ProjetoExtensao.model.Professor;
 import com.projeto_extensao.ProjetoExtensao.model.Projeto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -42,9 +43,20 @@ public class MatriculaRepository {
         this.template = template;
     }
 
-    public void save(List<Aluno> alunos, List<Professor> professores, Projeto projeto) {
-
-        String sql = "insert into aluno_professor_projeto(aluno_id, projeto_id";
-
+    public void saveAluno(String cpf, Integer id) {
+        String idPego;
+        try {
+            String sqlCpf = "SELECT id FROM aluno WHERE cpf = ?";
+            idPego = String.valueOf(template.queryForObject(sqlCpf, new Object[]{cpf}, Integer.class));
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        } try {
+            if (idPego != null) {
+                String sql = "insert into aluno_professor_projeto(aluno_id, projeto_id) values(?, ?)";
+                template.update(sql, idPego, id);
+            }
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

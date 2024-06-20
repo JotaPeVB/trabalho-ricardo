@@ -2,8 +2,12 @@ package com.projeto_extensao.ProjetoExtensao;
 
 import com.projeto_extensao.ProjetoExtensao.model.Aluno;
 import com.projeto_extensao.ProjetoExtensao.model.Professor;
+import com.projeto_extensao.ProjetoExtensao.model.Projeto;
 import com.projeto_extensao.ProjetoExtensao.repository.AlunoRepository;
+import com.projeto_extensao.ProjetoExtensao.repository.MatriculaRepository;
 import com.projeto_extensao.ProjetoExtensao.repository.ProfessorRepository;
+import com.projeto_extensao.ProjetoExtensao.repository.ProjetoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -39,6 +43,14 @@ public class ProjetoExtensaoApplication {
 		} else {
 			System.out.println("Nao encontrado");
 		}
+		Projeto projeto = context.getBean(Projeto.class);
+		projeto.setNome("Ricardo Malvadeza");
+
+		ProjetoRepository projetoRepository = context.getBean(ProjetoRepository.class);
+		projetoRepository.save(projeto);
+
+//		MatriculaRepository matriculaRepository = context.getBean(MatriculaRepository.class);
+//		matriculaRepository.saveAluno("07735986181", 1);
 	}
 
 }

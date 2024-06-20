@@ -44,6 +44,7 @@ public class ProfessorRepository {
         return professor;
     }
 
+
     public List<Professor> findProfessores(){
         String sql = "select * from professor;";
 
