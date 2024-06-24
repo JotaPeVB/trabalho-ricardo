@@ -44,10 +44,10 @@ public class ProjetoExtensaoApplication {
 			System.out.println("Nao encontrado");
 		}
 		Projeto projeto = context.getBean(Projeto.class);
-		projeto.setNome("Ricardo Malvadeza");
-
-		ProjetoRepository projetoRepository = context.getBean(ProjetoRepository.class);
-		projetoRepository.save(projeto);
+//		projeto.setNome("Ricardo Malvadeza");
+//
+//		ProjetoRepository projetoRepository = context.getBean(ProjetoRepository.class);
+//		projetoRepository.save(projeto);
 
 //		MatriculaRepository matriculaRepository = context.getBean(MatriculaRepository.class);
 //		matriculaRepository.saveAluno("07735986181", 1);
