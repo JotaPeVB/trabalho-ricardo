@@ -1,0 +1,7 @@
+{
+    "alunos": [
+      { "id": 1, "nome": "João Silva", "cpf": "111.222.333-44" },
+      { "id": 2, "nome": "Maria Oliveira", "cpf": "555.666.777-88" },
+      { "id": 3, "nome": "Carlos Pereira", "cpf": "999.000.888-77" }
+    ]
+  }
