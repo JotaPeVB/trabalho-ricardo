@@ -72,8 +72,16 @@ public class ProfessorRepository {
 
 
     public void delete(int id) {
-        String sql = "delete from professor where id = ?;";
+        String checkSql = "select count(*) from projeto_professor where professor_id = ?";
+        int count = template.queryForObject(checkSql, Integer.class, id);
 
-        template.update(sql, id);
+        if (count > 0) {
+            String deleteProjetoProfessorSql = "delete from projeto_professor where professor_id = ?";
+            template.update(deleteProjetoProfessorSql, id);
+        }
+
+        String deleteProfessorSql = "delete from professor where id = ?";
+        template.update(deleteProfessorSql, id);
     }
+
 }

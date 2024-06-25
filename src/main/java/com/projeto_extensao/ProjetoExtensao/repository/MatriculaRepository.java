@@ -106,20 +106,22 @@ public class MatriculaRepository {
         return alunos;
     }
 
-    public void desmatricularAlunos(Integer cpf) {
+    public void desmatricularAlunos(String cpf, Integer idProjeto) {
         Integer idPego;
         String sqlCpf = "SELECT aluno.id FROM aluno WHERE aluno.cpf = ?";
         idPego = template.queryForObject(sqlCpf, new Object[]{cpf}, Integer.class);
-        String sql = "delete from projeto_aluno where projeto_aluno.aluno_id = ?";
-        template.update(sql, idPego);
+        String sql = "delete from projeto_aluno where projeto_aluno.aluno_id = ?" +
+                " and projeto_aluno.projeto_id = ?";
+        template.update(sql, idPego, idProjeto);
     }
 
-    public void desmatricularProfessores(Integer cpf) {
+    public void desmatricularProfessores(String cpf, Integer idProjeto) {
         Integer idPego;
         String sqlCpf = "SELECT professor.id FROM professor WHERE professor.cpf = ?";
         idPego = template.queryForObject(sqlCpf, new Object[]{cpf}, Integer.class);
-        String sql = "delete from projeto_profesor where projeto_professor.professor_id = ?";
-        template.update(sql, idPego);
+        String sql = "delete from projeto_profesor where projeto_professor.professor_id = ?" +
+                " and projeto_professor.projeto_id = ?";
+        template.update(sql, idPego, idProjeto);
     }
 
 

@@ -68,9 +68,25 @@ public class ProjetoRepository {
 
 
     public void delete(int id) {
-        String sql = "delete from projeto_extensao where id = ?;";
+        String checkSql = "select count(*) from projeto_professor where projeto_id = ?";
+        int count = template.queryForObject(checkSql, Integer.class, id);
 
-        template.update(sql, id);
+        if (count > 0) {
+            String deleteProjetoSql = "delete from projeto_professor where projeto_id = ?";
+            template.update(deleteProjetoSql, id);
+        }
+
+        String checkSql2 = "select count(*) from projeto_aluno where projeto_id = ?";
+        int count2 = template.queryForObject(checkSql, Integer.class, id);
+
+        if (count2 > 0) {
+            String deleteProjetoSql = "delete from projeto_aluno where projeto_id = ?";
+            template.update(deleteProjetoSql, id);
+        }
+
+
+        String deleteProjetoSql = "delete from projeto where id = ?";
+        template.update(deleteProjetoSql, id);
     }
 
 

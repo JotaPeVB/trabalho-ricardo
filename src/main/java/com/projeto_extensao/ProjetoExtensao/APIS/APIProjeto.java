@@ -67,7 +67,19 @@ public class APIProjeto {
         @DeleteMapping("/{id}")
         @ResponseBody
         public void delete(@PathVariable("id") Integer id) {
-            projetoRepository.delete(id);
+                projetoRepository.delete(id);
+        }
+
+        @DeleteMapping("/{id}/desmatricularProfessor")
+        @ResponseBody
+        public void desmatricularProfessor(@PathVariable("id") Integer id, @RequestBody String cpf) {
+                matriculaRepository.desmatricularProfessores(cpf, id);
+        }
+
+        @DeleteMapping("/{id}/desmatricularAluno")
+        @ResponseBody
+        public void desmatricularAluno(@PathVariable("id") Integer id, @RequestBody String cpf) {
+                matriculaRepository.desmatricularAlunos(cpf,id);
         }
 
 }
